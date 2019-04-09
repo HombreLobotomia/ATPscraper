@@ -10,7 +10,6 @@ import re
 
 def matchScraper(url):
     match_ID = url.split('/')[-2]
-    tourney_data.append(match_ID)
     site = urlopen(Request(url, headers=hdr))
     listaframe = pd.read_html(site)
     score = listaframe[0].dropna(1, thresh=2).dropna(0).set_index(0)
@@ -26,7 +25,7 @@ def matchScraper(url):
     else:
                 dt_rows = dt_rows[1]+dt_rows[0]
 
-    df2[gen[i]]=tourney_data+df2[gen[i]]+dt_rows
+    df2[gen[i]]=tourney_data+match_ID+df2[gen[i]]+dt_rows
     #dt = dt.set_index(score.index)
     
     #dt = score.join(dt)
