@@ -26,7 +26,7 @@ def matchScraper(url):
     else:
                 dt_rows = dt_rows[1]+dt_rows[0]
 
-    df2[gen[i]]=tourney_data+df2[gen[i]]+dt_rows+match_ID
+    df2[gen[i]]=tourney_data+df2[gen[i]]+dt_rows
     #dt = dt.set_index(score.index)
     
     #dt = score.join(dt)
