@@ -22,10 +22,10 @@ def matchScraper(url):
     d = d.dropna(1)
     dt = d.T
     dt_rows = dt.values.tolist()
-    if first_score_name in df2[gen[i]]:    
+    if first_score_name in df2[gen[i]][1]:    
         dt_rows = dt_rows[0]+dt_rows[1]
     else:
-                dt_rows = dt_rows[0]+dt_rows[1]
+                dt_rows = dt_rows[1]+dt_rows[0]
 
     df2[gen[i]]=df2[gen[i]]+dt_rows
     #dt = dt.set_index(score.index)
