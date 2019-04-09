@@ -30,7 +30,7 @@ url = input('url')
 
 reqtext = requests.get(url).text
 
-urlspattern = re.compile('/en/scores/\d{4}.+False')
+urlspattern = re.compile('/en/scores/\d{4}.+match.+False')
 
 path_list = re.findall(urlspattern, reqtext)
 
