@@ -54,7 +54,8 @@ for i in range(len(url_list)):
     matchScraper(url_list[i])
 
 final_d = pd.DataFrame(df2)
-final_d.columns=['winner_seed', 'winner', 'loser_seed', 'loser', 'score', 'Serve Rating', 'Aces', 'Double Faults', '1st Serve',
+if len(url_list)>0:
+    final_d.columns=['winner_seed', 'winner', 'loser_seed', 'loser', 'score', 'Serve Rating', 'Aces', 'Double Faults', '1st Serve',
        '1st Serve Points Won', '2nd Serve Points Won', 'Break Points Saved',
        'Service Games Played', 'Return Rating', '1st Serve Return Points Won',
        '2nd Serve Return Points Won', 'Break Points Converted',
