@@ -9,7 +9,7 @@ import re
 #usate da pagina del torneo, esempio: https://www.atptour.com/en/scores/archive/doha/451/2019/results
 
 def matchScraper(url):
-    match_ID = [url.split('/')[-2]]
+    #match_ID = [url.split('/')[-2]]
     site = urlopen(Request(url, headers=hdr))
     listaframe = pd.read_html(site)
     score = listaframe[0].dropna(1, thresh=2).dropna(0).set_index(0)
@@ -23,9 +23,9 @@ def matchScraper(url):
     if first_score_name in df2[gen[i]][1]:    
         dt_rows = dt_rows[0]+dt_rows[1]
     else:
-                dt_rows = dt_rows[1]+dt_rows[0]
+        dt_rows = dt_rows[1]+dt_rows[0]
 
-    df2[gen[i]]=tourney_data+match_ID+df2[gen[i]]+dt_rows
+    df2[gen[i]]=df2[gen[i]]+dt_rows#+match_ID
     #dt = dt.set_index(score.index)
     
     #dt = score.join(dt)
@@ -56,8 +56,10 @@ for i in range(len(url_list)):
     matchScraper(url_list[i])
 
 final_d = pd.DataFrame(df2)
+#'Tourney', 'Year', 'Tourney ID', 'Match ID'
+
 if len(url_list)>0:
-    final_d.columns=['Tourney', 'Year', 'Tourney ID', 'Match ID', 'winner_seed', 'winner', 'loser_seed', 'loser', 'score', 'Serve Rating', 'Aces', 'Double Faults', '1st Serve',
+    final_d.columns=['winner_seed', 'winner', 'loser_seed', 'loser', 'score', 'Serve Rating', 'Aces', 'Double Faults', '1st Serve',
        '1st Serve Points Won', '2nd Serve Points Won', 'Break Points Saved',
        'Service Games Played', 'Return Rating', '1st Serve Return Points Won',
        '2nd Serve Return Points Won', 'Break Points Converted',
@@ -67,6 +69,8 @@ if len(url_list)>0:
        'Service Games Played', 'Return Rating', '1st Serve Return Points Won',
        '2nd Serve Return Points Won', 'Break Points Converted',
        'Return Games Played', 'Service Points Won', 'Return Points Won',
-       'Total Points Won']
-
+       'Total Points Won', ]
+final_d['Tourney']=tourney_name
+final_d['Tourney ID']=tourney_ID
+final_d['Year']=tourney_year
 final_d.to_csv('torneo.csv')
