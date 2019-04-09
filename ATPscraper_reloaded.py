@@ -11,7 +11,7 @@ import re
 #usate da pagina del torneo, esempio: https://www.atptour.com/en/scores/archive/doha/451/2019/results
 
 def matchScraper(url):
-    match_ID = url.split('/')[-2]
+    match_ID = [url.split('/')[-2]]
     site = urlopen(Request(url, headers=hdr))
     listaframe = pd.read_html(site)
     score = listaframe[0].dropna(1, thresh=2).dropna(0).set_index(0)
