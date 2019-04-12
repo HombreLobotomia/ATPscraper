@@ -10,7 +10,7 @@ weekdays = int(rankweek.weekday())
 rankweek = rankweek - timedelta(days=weekdays)
 rankweek = str(rankweek)
 rankweek = re.sub('0-','',rankweek)
-urlpath = 'https://www.atptour.com/en/rankings/singles/?rankDate={0}&countryCode=all&rankRange=1-{1}'.format(rankweek, rankrange)
+url = 'https://www.atptour.com/en/rankings/singles/?rankDate={0}&countryCode=all&rankRange=1-{1}'.format(rankweek, rankrange)
 hdr = {'User-Agent': 'Mozilla/5.0'}
 site = urlopen(Request(url, headers=hdr))
 df = pd.read_html(site)
