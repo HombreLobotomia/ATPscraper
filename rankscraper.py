@@ -1,4 +1,3 @@
-
 from datetime import date
 import pandas as pd
 from urllib.request import Request, urlopen
@@ -13,5 +12,5 @@ df = df[0]
 df.Move = df.Move.fillna(0)
 df.Move = df.Move.apply(int)
 df = df.drop('Country', axis=1)
-date  =  str(date.today())
-df.to_csv('ATP_top_'+rankrange+'_'+date+'.csv')
+data  =  str(date.today())
+df.to_csv('ATP_top_'+rankrange+'_'+data+'.csv')
