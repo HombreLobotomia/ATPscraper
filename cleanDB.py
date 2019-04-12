@@ -28,8 +28,32 @@ dfrecent.plot(x='tourney_date', y='winner_age')
 plt.show()
 #!! Quite surprisingly, that's not the case: tons of missing values even in players names
 
-
-
+match_stat_columns=['w_ace', 'w_df', 'w_svpt', 'w_1stIn', 'w_1stWon',
+       'w_2ndWon', 'w_SvGms', 'w_bpSaved', 'w_bpFaced', 'l_ace', 'l_df',
+       'l_svpt', 'l_1stIn', 'l_1stWon', 'l_2ndWon', 'l_SvGms', 'l_bpSaved',
+       'l_bpFaced']
+winner_stats = match_stat_columns[:9]
+loser_stats = match_stat_columns[9:]
+b=df.loc[df.index==168618]
+b=b[match_stat_columns]
+#npb=np.array(b)
+size = 0.5
+cmap = plt.get_cmap("tab20c")
+outer_colors = cmap(np.arange(3)*4)
+inner_colors = cmap(np.array([1, 2, 5, 6, 9, 10]))
+fig1, ax1 = plt.subplots()
+winstats=b[winner_stats].T
+losestats=b[loser_stats].T
+ax1.pie(winstats, colors=outer_colors, radius=1, wedgeprops=dict(width=size, edgecolor='w'))
+ax1.pie(losestats, colors=inner_colors, radius=1-size, wedgeprops=dict(width=size, edgecolor='w'))
+plt.show()
 #df2 = df.loc[df['winner_name'] == df['loser_name']]
 #len(set(players[i]))==len(players)
 
+ax=plt.subplot(projection='polar')
+bars=ax.bar(winner_stats, 3)
+ax=plt.subplot(projection='polar')
+cars=ax.bar(loser_stats, 3)
+for r, bar in zip(bars, cars):
+    bar.set_facecolor(plt.cm.viridis(cars/10.))
+plt.show()
