@@ -1,6 +1,7 @@
 from datetime import datetime, timedelta
 import pandas as pd
 from urllib.request import Request, urlopen
+import re
 
 def scraperank(rankrange, rankweek):
     
@@ -19,6 +20,7 @@ rankweek = input('enter week: format YYYY-MM-DD')
 rankweek = datetime.strptime(rankweek, '%Y-%m-%d').date()
 weekdays = int(rankweek.weekday())
 rankweek = rankweek - timedelta(days=weekdays)
+rankweek = re.sub('-0', '-', str(rankweek))
 
 scraperank(rankrange, rankweek)
 
